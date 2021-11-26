@@ -2,12 +2,15 @@
 @section("titulo", "Perfil")
 @section("content")
 	<div class="container px-6 my-6 grid">
-		<center>
-			<img class="object-cover w-56 h-56 rounded-full  " t
-			   @if (Auth::check())
-				src="{{ asset('storage/'.Auth::user()->foto) }}" @endif 
-				alt="" aria-hidden="true"
-			/>
+		<center>			
+			<img class="object-cover w-56 h-56 rounded-full  imgPerfil" 
+				   @if (Auth::check())
+					src="{{ asset('storage/'.Auth::user()->foto) }}" @endif 
+					alt="" aria-hidden="true"
+			/><br>
+			<form action="/updatePerfil" method="POST" enctype="multipart/form-data">
+				<input class="block text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="file" name="foto" />
+						
 			<h2 class="mb-8 text-2xl font-semibold text-gray-600 dark:text-gray-300">
 				<span class="ml-4">@if (Auth::check())
 					{{Auth::user()->name}} @endif
@@ -17,7 +20,7 @@
 			
 		</center>
 		<div class="px-6 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800" >
-			<form action="/updatePerfil" method="POST" enctype="multipart/form-data">
+			
 				<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300" >
 					Informações básicas
 				</h4></br>
@@ -39,7 +42,7 @@
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Senha Atual:</span>
 					<input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-					   type="password" name="Atualpassword" placeholder="***************" />
+					   type="password" name="oldpassword" placeholder="***************" />
 				</label>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">

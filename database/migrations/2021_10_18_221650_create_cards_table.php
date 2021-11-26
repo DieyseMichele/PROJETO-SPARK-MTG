@@ -23,7 +23,7 @@ class CreateCardsTable extends Migration
 			$table->string('mana');
 			$table->string('type_line');
 			$table->string('oracle_text');
-			$table->string('colors');
+			$table->string('colors')->nullable()->default(NULL);
 			$table->string('rarity');
 			$table->integer('quantidade')->nullable()->default(NULL);
 			$table->boolean('disponivel')->nullable()->default(NULL);	

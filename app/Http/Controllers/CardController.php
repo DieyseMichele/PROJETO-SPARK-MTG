@@ -17,9 +17,10 @@ class CardController extends Controller
 		$data = json_decode($json,true);
 		
 		
+		
 		foreach($data['baseDados'] as $valor =>$v)
 		{
-			$v->id_data = $data->get("id");
+			$v->id_data = $data->get("id_data");
 			$v->oracle_id = $data->get("oracle_id");
 			$v->name = $data->get("name");
 			$v->image_uris = $data->get("image_uris");

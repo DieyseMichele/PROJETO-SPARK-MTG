@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -20,7 +21,13 @@ class LoginController extends Controller
 		$credenciais = $request->only("email", "password");
 		
 		if (Auth::attempt($credenciais)) {
-            return view('templates.templateAdmin');
+			
+			if(Auth::user()->permissao == 0){
+				return redirect("/home");
+			}else{
+				return redirect("/homeUser");
+			}
+            
         } else {
 			$request->Session()->flash("status", "erro");
 			$request->Session()->flash("mensagem", "Usuário ou senha incorretos!");

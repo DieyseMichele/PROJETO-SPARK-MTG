@@ -13,10 +13,10 @@ class UsuarioController extends Controller
 {
 	public function __construct() {
 		$this->middleware("auth");
-	}
+	}//valida se o usuario está logado
 	
     public function index()
-    {
+    {//retorna todos os usuarios
         $usuario = new User();
 		$usuarios = User::All();
         return view("administrador.CadastrarUsuario", [
@@ -24,14 +24,9 @@ class UsuarioController extends Controller
 			"usuarios" => $usuarios
 		]);
     }
-
-    public function create()
-    {
-        //
-    }
  
     public function store(Request $request)
-    {
+    {// cadastra os dados de um novo usuário 
         $validado = $request->validate([
 			"name" => "required",
 			"email" => "required|unique:users|email",
@@ -59,18 +54,13 @@ class UsuarioController extends Controller
 		
 		if ($request->hasFile('foto')) 
 		{
-			$usuario->foto =  $request->file("foto")->store("usuarios");
-			
-		}else{
-			
-			
+			$usuario->foto =  $request->file("foto")->store("usuarios");			
 		}
-
 		
-		
-		
+		$usuario->permissao = $request->get("perfil");
 		$usuario->password = Hash::make($request->get("password"));
-		
+				
+	
 		$usuario->save();
 		
 		$request->Session()->flash("status", "sucesso");
@@ -78,10 +68,9 @@ class UsuarioController extends Controller
 		
 		return redirect("/usuario");
     }
-
    
     public function show()
-    {
+    {//lista todo os usuários cadastrados
         $usuario = new User();
 		$usuarios = User::All();
         return view("administrador.ListarUsuarios", [
@@ -89,41 +78,97 @@ class UsuarioController extends Controller
 			"usuarios" => $usuarios
 		]);
     }
+	 public function searchUsuario(Request $request){//pesquissa os usuários cadastrados
+		// pega o valor do search pelo request
+		$search = $request->input('search');
+
+		//seleciona os usuários de nome e email parecidos ao search
+		$usuarios = User::query()
+			->where('name', 'LIKE', "%{$search}%")
+			->orWhere('email', 'LIKE', '%'.$search.'%')
+			->paginate(10);
+
+		//retorna a view com os valores encontrados
+		return view('administrador.ListarUsuarios', compact('usuarios'));
+	}
+
+	public function editarUser(Request $request)//alteração dos usuários pelo admin sem a senha como obrigatório
+    {
+        $validado = $request->validate([
+			"name" => "required",
+			"email" => "required|unique:users|email",
+			'email' => Rule::unique('users')->ignore($request->get("id")),
+			"foto" => "mimes:jpg,bmp,png,webp",
+			'ConfirmarPassword' => 'same:password',
+			
+		], [
+			"required" => 'O campo :attribute é obrigatório.',
+			"email.unique" => "O e-mail já existe.",
+			"email.email" => "O campo deve ser do tipo e-mail.",
+			"foto.mimes" => "É necessário importar um arquivo de imagem (jpg, bmp, png, webp).",
+			"ConfirmarPassword.same" => "As senhas devem ser iguais."
+		]);
+		
+		if ($request->get("id") != "") {
+			$usuario = User::Find($request->get("id"));
+		} else {
+			$usuario = new User();
+		}
+		
+		$usuario->name = $request->get("name");
+		$usuario->email = $request->get("email");
+		
+		if ($request->hasFile('foto')) 
+		{
+			$usuario->foto =  $request->file("foto")->store("usuarios");			
+		}
+		
+		$usuario->permissao = $request->get("perfil");
+		
+		if ($request->get("password") != "") {
+			$usuario->password = Hash::make($request->get("password"));
+		} 
+		
+		$usuario->save();
+		
+		$request->Session()->flash("status", "sucesso");
+		$request->Session()->flash("mensagem", "Usuário atualizado com sucesso!");
+		
+		return redirect("/usuariosCadastrados");
+    }
 
     public function edit($id)
-    {
+    {//encontra e retorna os dados do usuário que tem o id enviado como parametro
 		$usuario = User::Find($id);
 		$usuarios = User::All();
         return view("administrador.EditarUsuario", [
 			"usuario" => $usuario,
 			"usuarios" => $usuarios
-		]);
-        
+		]);       
     }
 
-  
-    public function update(Request $request)
+    public function update(Request $request)//alteração de dados do perfil do user autenticado
     {
-		$usuario = Auth::user();
+		$usuario = Auth::user();//pega os dados do usuário autenticado
 		
 		$usuario->name = $request->get("name");
 		$usuario->email = $request->get("email");
 		
-		
-		if($request->get("AtualPassword")!= "")
+		if ($request->hasFile('foto')) //verifica se o campo file tem arquivo, caso tenha adiciona a nova foto ao perfil
 		{
-			$atualPassword = Hash::make($request->get("AtualPassword"));
-	
-			if ($atualPassword!=$usuario->password) 
-			{
-				$request->Session()->flash("status", "erro");
-				$request->Session()->flash("mensagem", "Senha incorreta!");
-				
-			} else {
-				$usuario->password = Hash::make($request->get("NewPassword"));
-			}	
+			$usuario->foto =  $request->file("foto")->store("usuarios");			
 		}
+	
+		if (Hash::check($request->get("oldpassword"),Auth::user()->password)){//valida se a senha atual é igual a digitada no input, caso sim altera a senha para nova senha digitada.
 		
+			$usuario->password = Hash::make($request->get("NewPassword"));
+		}
+		else {			
+			$request->Session()->flash("status", "erro");
+			$request->Session()->flash("mensagem", "Senha incorreta!");
+			return redirect("/perfil");
+		}	
+			
 		$usuario->save();
 		
 		$request->Session()->flash("status", "sucesso");
@@ -132,10 +177,10 @@ class UsuarioController extends Controller
 		return redirect("/perfil");
     }
 
-    public function destroy($id, Request $request)
+    public function destroy($id, Request $request)//exclusão de usuário cadastrado pelo admin
     {
-        $usuario = User::Find($id);
-		\Storage::delete($usuario->foto);
+        $usuario = User::Find($id);//encontra o id do usuário enviado como paramentro
+		\Storage::delete($usuario->foto);//exclui a foto do storage
 		$usuario->delete();
 		
 		$request->Session()->flash("status", "sucesso");

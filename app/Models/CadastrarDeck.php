@@ -5,14 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class CadastrarDeck extends Model
 {
     use HasFactory;
-	
-	protected $table = "card";
-	
-	protected $casts = [
-        'colors' => 'array'
-    ];
-	
+	protected $table = "cadastrar_deck";
 }

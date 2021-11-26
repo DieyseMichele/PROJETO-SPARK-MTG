@@ -118,7 +118,9 @@ button,input{
 button,select{
 	text-transform:none; /* O texto dessas tags são redenrizados como estão */
 }
-
+.td{
+	background-color:green;
+}
 legend{
 	box-sizing:border-box;/*As propriedades de largura e de altura incluem o tamanho padding size e a propriedade border*/
 	color:inherit; /*Herda a cor do elemento pai*/
@@ -424,6 +426,49 @@ button,input,optgroup,select,textarea{
 	border-color:#63b3ed
 }
 
+.imgPerfil:hover{
+	opacity: 0.5;
+}
+
+.flip-box {
+  background-color: transparent;
+  width: 500px;
+  height: 400px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
+}
+
+.flip-box-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-box-front, .flip-box-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-box-front {
+  background-color: transparent;
+  color: black;
+}
+
+.flip-box-back {
+  background-color: #7e3af2;
+  color: white;
+  transform: rotateY(180deg);
+}
+
 .space-y-2>:not(template)~:not(template){
 	--space-y-reverse:0;
 	margin-top:calc(0.5rem*(1 - var(--space-y-reverse)));
@@ -486,6 +531,11 @@ button,input,optgroup,select,textarea{
 	background-color:#e02424;
 	background-color:rgba(224,36,36,var(--bg-opacity))
 }
+.bg-yellow-100{
+	--bg-opacity:1;
+	background-color:#FFFF00;
+	background-color:rgba(255,255,0,var(--bg-opacity))
+}
 .bg-orange-100{
 	--bg-opacity:1;
 	background-color:#feecdc;
@@ -495,6 +545,11 @@ button,input,optgroup,select,textarea{
 	--bg-opacity:1;
 	background-color:#def7ec;
 	background-color:rgba(222,247,236,var(--bg-opacity))
+}
+.bg-green-700{
+	--bg-opacity:1;
+	background-color:#046c4e;
+	background-color:rgba(4,108,78,var(--bg-opacity))
 }
 .bg-teal-100{
 	--bg-opacity:1;

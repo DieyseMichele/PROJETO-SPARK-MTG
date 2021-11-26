@@ -1,7 +1,8 @@
-@extends("templates.templateAdmin")
+@extends("templates.popup")
 
-@section("content")
-	
+@section("titulo", "Editar Usuário")
+
+@section("editar")
 	<div class="container px-6 my-6 grid">
 		<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300" >
 			Cadastrar em massa:
@@ -69,7 +70,7 @@
 					<span class="text-gray-700 dark:text-gray-400">Custo de Mana:</span>
 					<select name="simboloMana" id= "simboloMana" class="meuselect form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" 
 						data-field-id="mana" data-separator aria-hidden="true" 
-					 onchange="AddMana()" >
+					 onchange="AddMana()" value="{{ $card->mana }}">
 						<option value>Adicionar símbolo de mana</option>
 						<option value="{W}">{W} - um mana branco</option>
 						<option value="{U}">{U} - um mana azul</option>
@@ -122,7 +123,7 @@
 				</br>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Lype Line:</span>
-						<select name="type_line" id="typeLine" class="meuselect form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" data-separator aria-hidden="true" onchange="AddType()" >
+						<select name="type_line" id="typeLine" class="meuselect form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" data-separator aria-hidden="true" onchange="AddType()" value="{{ $card->type_line }}">
 							<optgroup label="Types">
 								<option data-pol="+" data-item="artifact" value="artifact">Artifact</option>
 								<option data-pol="+" data-item="conspiracy" value="conspiracy">Conspiracy</option>
@@ -633,8 +634,7 @@
 				</br>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Descrição:</span>
-					<textarea id="oracle_text" name="oracle_text" rows="4" cols="50" class="block w-g mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-textarea" value="{{ $card->oracle_text }}">
-						As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps.
+					<textarea id="oracle_text" name="oracle_text" rows="4" cols="50" class="block w-g mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-textarea" value="{{ $card->oracle_text }}" placeholder="As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps.">						
 					</textarea>
 				</label>
 				</br>
@@ -676,7 +676,7 @@
 				</br>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Raridade:</span>
-					<select name="rarity" id= "rarity" class="form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" >
+					<select name="rarity" id= "rarity" class="form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ $card->rarity }}">
 						<option value>Adicionar raridade</option>
 						<option value="common">Comum</option>
 						<option value="uncommon">Incomum</option>

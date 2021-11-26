@@ -6,24 +6,32 @@
 	<div class="container px-6 my-6 grid">
 		<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300" >
 			Cadastrar Usuário:
-		</h4>
+		</h4></br>
 		<div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800" >
 			<form action="/usuario" method="POST" enctype="multipart/form-data">
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Nome:</span>
 					<input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
 					  type="text" name="name" placeholder="Nome completo" value="{{ $usuario->name }}" required/>
-				</label>
+				</label></br>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">E-mail:</span>
 					<input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
 						type="email" name="email" placeholder="nome@email.com" value="{{ ($usuario->email) }}"required/>
-				</label>	
+				</label></br>	
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Foto:</span>
 					<input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
 						type="file" name="foto" placeholder="Selecionar Arquivo"/>
-				</label>
+				</label></br>
+				<label class="block text-sm">
+					<span class="text-gray-700 dark:text-gray-400">Perfil:</span>
+					<select name="perfil" id= "perfil" class="form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-select" >
+						<option value>Selecionar Perfil</option>
+						<option value="0">Admin</option>
+						<option value="1">Usuário</option>
+					</select>
+				</label></br>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Senha:</span>
 					<input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
