@@ -1,7 +1,7 @@
 @extends("templates.templateAdmin")
 @section("titulo", "Usuários Cadastrados")
 @section("content")
-	<div class="container px-6 my-6 grid">
+	<div class="container px-6 my-6 grid" >
 		<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
 		  Usuários Cadastrados
 		</h4>

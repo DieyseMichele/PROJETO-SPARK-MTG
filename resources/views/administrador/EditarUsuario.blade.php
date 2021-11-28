@@ -53,13 +53,12 @@
                 </button>
 				@csrf
 				<input type="hidden" name="id" value="{{ $usuario->id }}" />
-				<button type="submit" onclick ="$('#fancybox').close())" class="px-4 py-2 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" >
+				<button type="submit" value="Close" onClick="window.parent.jQuery.fancybox.close();" class="px-4 py-2 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" >
                   Salvar    
                 </button>		
 			</form>
 		</div>
 	</div>
 <script>
-
-</script>	
+	
 @endsection

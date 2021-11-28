@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\UserCollection;
-use App\Models\Card;
+use App\Models\CadastroCards;
+use mtgsdk\Card;
 
 class CardCadastroController extends Controller
 {
@@ -16,12 +17,7 @@ class CardCadastroController extends Controller
 	
     public function index()
     {
-        $card = new Card();
-		$cards = Card::All();
-        return view("cards.Cadastro", [
-			"card" => $card,
-			"cards" => $cards
-		]);
+        
     }
 
     /**
@@ -43,22 +39,17 @@ class CardCadastroController extends Controller
     public function store(Request $request)
     {
         
-		if ($request->get("id") != "") {
-			$card = Card::Find($request->get("id"));
+		if ($request->get("id_api") != "") {
+			$card = CadastroCards::Find($request->get("id_api"));
 		} else {
-			$card = new Card();
+			$card = new CadastroCards();
 		}
 		
-		$card->id_data = $request->get("id_data");
-		$card->oracle_id = $request->get("oracle_id");
+		$card->id_api = $request->get("id_api");
 		$card->name = $request->get("name");
-		$card->released_at = $request->get("released_at");
-		$card->image_uris = $request->get("image_uris");
-		$card->mana = $request->get("simboloMana");
-		$card->type_line = $request->get("type_line");
-		$card->oracle_text = $request->get("oracle_text");
-		$card->colors = $request->get("identity");
-		$card->rarity = $request->get("rarity");
+		$card->imageUrl = $request->get("imageUrl");
+		$card->manaCost = $request->get("manaCost");
+		$card->colors = $request->get("colors");
 		$card->quantidade = $request->get("quantidade");
 		$card->disponivel = $request->get("disponivel");
 		
@@ -80,12 +71,7 @@ class CardCadastroController extends Controller
      */
     public function show()
     {
-        $card = new Card();
-		$cards = Card::All();
-        return view("cards.Listagem", [
-			"card" => $card,
-			"cards" => $cards
-		]);
+        
     }
 
     /**
@@ -95,13 +81,24 @@ class CardCadastroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $card = Card::Find($id);
-		$cards = Card::All();
-        return view("cards.editarCard", [
-			"card" => $card,
-			"cards" => $cards
-		]);
+    {     	
+		$cards = Card::Find($id);
+		$card = new CadastroCards();
+		
+		$card->id_api = $cards->id;
+		$card->name = $cards->name;
+		$card->imageUrl = $cards->imageUrl;
+		$card->manaCost = $cards->manaCost;
+		$card->rarity = $cards->rarity;
+		$card->colors = $cards->colors;
+	
+	
+		$card->save();
+		
+		
+		return redirect("/home"); 
+
+
     }
 
     /**
@@ -124,7 +121,7 @@ class CardCadastroController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        Card::Destroy($id);
+        CadastroCards::Destroy($id);
 		
 		$request->Session()->flash("status", "excluido");
 		$request->Session()->flash("mensagem", "Card excluído com sucesso!");

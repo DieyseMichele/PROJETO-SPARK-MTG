@@ -63,16 +63,28 @@
 					  </td>	
 					  
 						@if($emprestimo->status == 'D')
-							<td class="px-4 py-3 text-center text-sm bg-green-100">
-								{{ $emprestimo->status }}
+							<td class="px-4 py-3  text-sm ">
+								<span
+								  class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+									>
+									Devolvido
+								</span>
 							</td>						
 						@elseif($emprestimo->status == 'E')
-							<td class="px-4 py-3 text-center text-sm bg-yellow-100">
-								{{ $emprestimo->status }}
+							<td class="px-4 py-3  text-sm ">
+								<span
+								  class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
+								>
+								  Emprestado
+								</span>	
 							</td>
 						@elseif($emprestimo->status == 'A')
-							<td class="px-4 py-3 text-center text-sm bg-red-600 ">
-								{{ $emprestimo->status }}
+							<td class="px-4 py-3  text-sm ">
+								<span
+								  class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+									>
+									Atraso
+								</span>
 							</td>
 						@endif
 					  		  

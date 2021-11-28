@@ -26,7 +26,7 @@
 		<script src="{!! mix('js/app.js') !!}"></script>
 		
 	</head>
-  <body>
+  <body >
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }" @if (!Auth::check())
 				style="display:none;"
 			@endif>

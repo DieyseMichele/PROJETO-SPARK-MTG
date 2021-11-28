@@ -158,23 +158,28 @@ class UsuarioController extends Controller
 		{
 			$usuario->foto =  $request->file("foto")->store("usuarios");			
 		}
-	
-		if (Hash::check($request->get("oldpassword"),Auth::user()->password)){//valida se a senha atual é igual a digitada no input, caso sim altera a senha para nova senha digitada.
-		
-			$usuario->password = Hash::make($request->get("NewPassword"));
-		}
-		else {			
-			$request->Session()->flash("status", "erro");
-			$request->Session()->flash("mensagem", "Senha incorreta!");
-			return redirect("/perfil");
-		}	
+		if ($request->get("oldpassword") != "" or $request->get("NewPassword")!= "") {
+			if (Hash::check($request->get("oldpassword"),Auth::user()->password)){//valida se a senha atual é igual a digitada no input, caso sim altera a senha para nova senha digitada.
 			
+				$usuario->password = Hash::make($request->get("NewPassword"));
+			}
+			else {			
+				$request->Session()->flash("status", "erro");
+				$request->Session()->flash("mensagem", "Senha incorreta!");
+				return redirect("/perfil");
+			}	
+		}	
 		$usuario->save();
 		
 		$request->Session()->flash("status", "sucesso");
 		$request->Session()->flash("mensagem", "Perfil atualizado com sucesso!");
 		
-		return redirect("/perfil");
+		if(Auth::user()->permissao == 1){
+			return redirect("/perfilUser");
+		}else{
+			return redirect("/perfil");
+		}
+		
     }
 
     public function destroy($id, Request $request)//exclusão de usuário cadastrado pelo admin

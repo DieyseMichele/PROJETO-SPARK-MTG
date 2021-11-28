@@ -4,23 +4,92 @@
 	<div class="container px-6 mx-auto grid">
 		</br></br>
 		<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300 text-center">
-		  Cards Cadastrados
-		</h4></br></br>
+		  Cards
+		</h4>
+		<div class="dropdown " >
+		  <button class="dropbtn px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Visualizar</button>
+		  <div class="dropdown-content">
+			  <a href="#" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+				<svg
+					  class="w-5 h-5"
+					  aria-hidden="true"
+					  fill="none"
+					  stroke-linecap="round"
+					  stroke-linejoin="round"
+					  stroke-width="2"
+					  viewBox="0 0 24 24"
+					  stroke="currentColor"
+					>
+					  <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+					</svg>
+					<span class="ml-4">Lista</span>
+			  </a>
+			  <a href="#" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+				<svg
+					  class="w-5 h-5"
+					  aria-hidden="true"
+					  fill="none"
+					  stroke-linecap="round"
+					  stroke-linejoin="round"
+					  stroke-width="2"
+					  viewBox="0 0 24 24"
+					  stroke="currentColor"
+					>
+					  <path fill="none" d="M7.228,11.464H1.996c-0.723,0-1.308,0.587-1.308,1.309v5.232c0,0.722,0.585,1.308,1.308,1.308h5.232
+						c0.723,0,1.308-0.586,1.308-1.308v-5.232C8.536,12.051,7.95,11.464,7.228,11.464z M7.228,17.351c0,0.361-0.293,0.654-0.654,0.654
+						H2.649c-0.361,0-0.654-0.293-0.654-0.654v-3.924c0-0.361,0.292-0.654,0.654-0.654h3.924c0.361,0,0.654,0.293,0.654,0.654V17.351z
+						 M17.692,11.464H12.46c-0.723,0-1.308,0.587-1.308,1.309v5.232c0,0.722,0.585,1.308,1.308,1.308h5.232
+						c0.722,0,1.308-0.586,1.308-1.308v-5.232C19,12.051,18.414,11.464,17.692,11.464z M17.692,17.351c0,0.361-0.293,0.654-0.654,0.654
+						h-3.924c-0.361,0-0.654-0.293-0.654-0.654v-3.924c0-0.361,0.293-0.654,0.654-0.654h3.924c0.361,0,0.654,0.293,0.654,0.654V17.351z
+						 M7.228,1H1.996C1.273,1,0.688,1.585,0.688,2.308V7.54c0,0.723,0.585,1.308,1.308,1.308h5.232c0.723,0,1.308-0.585,1.308-1.308
+						V2.308C8.536,1.585,7.95,1,7.228,1z M7.228,6.886c0,0.361-0.293,0.654-0.654,0.654H2.649c-0.361,0-0.654-0.292-0.654-0.654V2.962
+						c0-0.361,0.292-0.654,0.654-0.654h3.924c0.361,0,0.654,0.292,0.654,0.654V6.886z M17.692,1H12.46c-0.723,0-1.308,0.585-1.308,1.308
+						V7.54c0,0.723,0.585,1.308,1.308,1.308h5.232C18.414,8.848,19,8.263,19,7.54V2.308C19,1.585,18.414,1,17.692,1z M17.692,6.886
+						c0,0.361-0.293,0.654-0.654,0.654h-3.924c-0.361,0-0.654-0.292-0.654-0.654V2.962c0-0.361,0.293-0.654,0.654-0.654h3.924
+						c0.361,0,0.654,0.292,0.654,0.654V6.886z"></path>
+
+					</svg>
+					<span class="ml-4">Ícones Grandes</span>
+			  </a>
+		  </div>
+		</div>
+		</br>
 		<div class="w-full overflow-hidden rounded-lg shadow-xs">
 		  <div class="w-full overflow-x-auto">
 			<table class="w-full whitespace-no-wrap ">
 			  <thead>
+				<tr>
+					<div class="flex justify-center flex-1 lg:mr-32">
+					  <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+						
+						<form action="/searchDeck" method="GET">
+							@csrf
+							<input
+							  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+							  type="text"
+							  placeholder="Digite o nome do card, ,quantidade de mana, raridade "
+							  aria-label="Search" name="search" id="search"
+							/>
+							<span class="absolute inset-y-0 right-0 flex items-center pl-2">
+								<button type="submit" class="p-1 focus:outline-none focus:shadow-outline focus-within:text-purple-500">
+									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+								</button>
+							</span>
+						</form>
+					  </div>				  
+					</div>
+					</tr></br>
 				<tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 				
 					<th class="px-4 py-3">Imagem</th>
-				  <th class="px-4 py-3">Nome</th>
-				  <th class="px-4 py-3">Descrição</th>
-				  <th class="px-4 py-3">Mana</th>
-				  <th class="px-4 py-3">Raridade</th>
-				  <th class="px-4 py-3">Quantidade</th>
-				  <th class="px-4 py-3">Disponibilidade</th>
-				  <th class="px-4 py-3">Ações</th>
-				  
+					<th class="px-4 py-3">Nome</th>
+					<th class="px-4 py-3">Descrição</th>
+					<th class="px-4 py-3">Mana</th>
+					<th class="px-4 py-3">Raridade</th>
+					<th class="px-4 py-3">Cores</th>
+					<th class="px-4 py-3">Tipo</th>
+					<th class="px-4 py-3">Disponibilidade</th>
+					<th class="px-4 py-3">Obter</th>			  
 				</tr>
 			  </thead>
 			  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -29,10 +98,13 @@
 					  <td class="px-4 py-3">
 						<div class="flex items-center text-sm">
 						  <!-- Avatar with inset shadow -->
-							<div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+							<div class=" dropdown relative hidden w-8 h-8 mr-3 rounded-full md:block">
 							<img class="object-cover w-full h-full rounded-full" 
-								src="{{url($card->image_uris)}}" width="100" loading="lazy" 
+								src="{{$card->imageUrl}}" alt="{{ $card->name }}" width="100" loading="lazy" 
 							/>
+							<div class="dropdown-content ">
+							  <img src="{{$card->imageUrl}}" alt="{{ $card->name }}" >
+							  </div>
 							<div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
 						  </div>
 						</div>
@@ -41,15 +113,30 @@
 						<p class="font-semibold">{{ $card->name }}</p>
 					  </td>
 					  <td class="px-4 py-3 text-sm ">
-						{{ $card->oracle_text }}
+						{{ $card->text }}
 					  </td>
-					   <td class="px-4 py-3 text-sm text-center">
-						{{ $card->mana }}
+					   <td class="px-4 py-3 text-sm ">
+						{{ $card->manaCost }}
 					  </td>
-					   <td class="px-4 py-3 text-sm text-center">
+					   <td class="px-4 py-3 text-sm ">
 						{{ $card->rarity }}
 					  </td>
-					  
+					  <td class="px-4 py-3 text-sm ">
+						
+						@foreach ( $card->colors as $c => $value)
+							{{ $value}}
+						@endforeach
+					  </td>
+					  <td class="px-4 py-3 text-sm ">
+						{{ $card->type }}
+					  </td>
+					   <td class="px-4 py-3 text-sm ">
+						<span
+                          class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
+                        >
+                          Indisponível
+                        </span>
+					  </td>
 					   
 					  <td class="px-4 py-3">
 						<div class="flex items-center space-x-4 text-sm">
@@ -62,62 +149,101 @@
 							  fill="currentColor"
 							  viewBox="0 0 20 20"
 							>
-							  <path
-								d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-							  ></path>
+							  <path d="M10.219,1.688c-4.471,0-8.094,3.623-8.094,8.094s3.623,8.094,8.094,8.094s8.094-3.623,8.094-8.094S14.689,1.688,10.219,1.688 M10.219,17.022c-3.994,0-7.242-3.247-7.242-7.241c0-3.994,3.248-7.242,7.242-7.242c3.994,0,7.241,3.248,7.241,7.242C17.46,13.775,14.213,17.022,10.219,17.022 M15.099,7.03c-0.167-0.167-0.438-0.167-0.604,0.002L9.062,12.48l-2.269-2.277c-0.166-0.167-0.437-0.167-0.603,0c-0.166,0.166-0.168,0.437-0.002,0.603l2.573,2.578c0.079,0.08,0.188,0.125,0.3,0.125s0.222-0.045,0.303-0.125l5.736-5.751C15.268,7.466,15.265,7.196,15.099,7.03"></path>
 							</svg>
 						  </a>
-						  <form action="/cadastrarCard/{{ $card->id }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir');">
-								<input type="hidden" name="_method" value="DELETE" />
-								@csrf
-								<button type="submit" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-								aria-label="Delete" 
-								>
-									<svg
-									  class="w-5 h-5"
-									  aria-hidden="true"
-									  fill="currentColor"
-									  viewBox="0 0 20 20"
-									>
-									  <path
-										fill-rule="evenodd"
-										d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-										clip-rule="evenodd"
-									  ></path>
-									</svg>
-								</button>
-						 </form>
 						</div>
 					  </td>
 					</tr>
 				@endforeach					
 			  </tbody>
 			</table>
+			
 		  </div>
-		</div>
+		  <div
+                class=" grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+              >
+        
+                <span class="col-span-2"></span>
+                <!-- Pagination -->
+                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                  <nav aria-label="Table navigation">
+                    <ul class="inline-flex items-center">
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                          aria-label="Previous"
+                        >
+                          <svg
+                            class="w-4 h-4 fill-current"
+                            aria-hidden="true"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                              clip-rule="evenodd"
+                              fill-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                        >
+                          1
+                        </button>
+                      </li>
+                      
+                      <li>
+                        <button
+                          class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                          aria-label="Next"
+                        >
+                          <svg
+                            class="w-4 h-4 fill-current"
+                            aria-hidden="true"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd"
+                              fill-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </span>
+              </div>
 		
-		<h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
 			
 			<div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 p-1 mt-2 mx-auto lg:mx-2 md:mx-2 justify-between">
+				<?php  $contCard = 0; ?>
 				@foreach ($cards as $card)
-				<div class="flip-box rounded rounded-t-lg overflow-hidden shadow">
-					
+				<div class="flip-box rounded rounded-t-lg overflow-hidden shadow">				
 				  <div class="flip-box-inner text-xs font-semibold">
 					<div class="flip-box-front rounded rounded-t-lg overflow-hidden shadow max-w-xs my-3 text-center">
-					  <img src="{{url($card->image_uris)}}" alt="{{ $card->name }}" class="w-f" >
+					  <img src="{{$card->imageUrl}}" alt="{{ $card->name }}" class="w-f" >
 					</div>
 					<div class="flip-box-back px-4 py-3 text-sm ">
 						<p class="font-semibold">Nome: {{ $card->name }}</p>
-						<p class="font-semibold"> Descrição: {{ $card->oracle_text }}</p>
-						<p class="font-semibold"> Custo de Mana: {{ $card->mana }}</p>
+						<p class="font-semibold"> Descrição: {{ $card->text }}</p>
+						<p class="font-semibold"> Custo de Mana: {{ $card->manaCost }}</p>
 						<p class="font-semibold"> Raridade: {{ $card->rarity }}</p>
+						<?php $contCard = $contCard + 1?>
+						@if($contCard >= 4)
+							<div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 p-1 mt-2 mx-auto lg:mx-2 md:mx-2 justify-between">
+							<?php $contCard = 0; ?>							
+						@endif
 					</div>
 				  </div>
 				 
 				</div>
 				 @endforeach						
 			</div>
-		</h2>
+		</div>
 	</div>		
 	
 @endsection

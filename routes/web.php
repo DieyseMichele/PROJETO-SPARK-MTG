@@ -45,14 +45,14 @@ Route::get('/login', function () {
     return view('templates.templateLogin');
 })->name("login");//exibir página de login
 
-Route::get('/home', function () {
-    return view('templates.templateAdmin');
-});//exibir home
 Route::get('/homeUser', function () {
     return view('templates.templateUser');
 });//exibir home
 
 Route::get('/perfil', function () {
+    return view('administrador.PerfilAdmin');
+});
+Route::get('/perfilUser', function () {
     return view('usuario.Perfil');
 });//exibir página do perfil
 
@@ -82,6 +82,7 @@ Route::get("/searchUsuario", [ UsuarioController::class, "searchUsuario" ]);//bu
 Route::get("/relatorioEmprestimo", [ EmprestimoAdminController::class, "show" ]);//exibir relatório de empréstimos
 Route::get("/searchEmprestimo", [ EmprestimoAdminController::class, "searchEmprestimo" ]);//busca empréstimos no relatorio de emprestimos realizados
 
+Route::get("/home", [ ConsumirAPIController::class, "index" ]);
 Route::get("/consumirApi", [ ConsumirAPIController::class, "index" ]);
 Route::post("/bulkdata", [ CardController::class, "bulkdata" ]);
 

@@ -1,4 +1,4 @@
-@extends("templates.templateUser")
+@extends("templates.templateAdmin")
 @section("titulo", "Perfil")
 @section("content")
 	<div class="container px-6 my-6 grid">

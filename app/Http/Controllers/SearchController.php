@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Card;
+use App\Models\CadastroCards;
 use App\Models\CadastrarDeck;
 
 class SearchController extends Controller
@@ -16,9 +16,9 @@ class SearchController extends Controller
 		$search = $request->input('search');
 
 		// Search in the title and body columns from the posts table
-		$posts = Card::query()
+		$posts = CadastroCards::query()
 			->where('name', 'LIKE', "%{$search}%")
-			->orWhere('mana', 'LIKE', '%'.$search.'%')
+			->orWhere('manaCost', 'LIKE', '%'.$search.'%')
             ->orWhere('rarity', 'LIKE', '%'.$search.'%')
 			->paginate(10);
 
