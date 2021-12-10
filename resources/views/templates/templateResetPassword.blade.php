@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>MAGIC - @yield("titulo")</title>
+		<title>Spark - MTG Deckbuilder - @yield("titulo")</title>
 		<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/estilo.css') }}" />

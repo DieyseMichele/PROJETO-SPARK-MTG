@@ -17,8 +17,8 @@ class CreateCadastroCardsTable extends Migration
             $table->id();
 			$table->string('id_api');
 			$table->string('name');
-			$table->string('imageUrl', 200);
-			$table->string('manaCost');
+			$table->string('imageUrl', 200)->nullable()->default(NULL);
+			$table->string('manaCost')->nullable()->default(NULL);
 			$table->string('rarity');
 			$table->string('colors')->nullable()->default(NULL);
 			$table->integer('quantidade')->nullable()->default(NULL);

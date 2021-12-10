@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!-- Título da página -->
-		<title>UniMagic - @yield("titulo")</title>
+		<title>Spark - MTG Deckbuilder - @yield("titulo")</title>
 		
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
@@ -34,7 +34,7 @@
       <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
         <div class="py-4 text-gray-500 dark:text-gray-400" >
           <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            UniMagic
+            Spark - MTG Deckbuilder
           </a>
 		  <!-- Lista do painel de controle -->
           <ul class="mt-6">
@@ -42,7 +42,7 @@
               <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
               <a
                 class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="/home"
+                href="/HomeUser"
               >
                 <svg
                   class="w-5 h-5"
@@ -82,7 +82,7 @@
                 >
                   <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                 </svg>
-                <span class="ml-4">Listagem de Cards</span>
+                <span class="ml-4">Cards do UniMagic</span>
               </a>
             </li>			
 			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/ListarDecksUser")) 
@@ -154,7 +154,7 @@
 			<li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/home"
+                href="/HomeUser"
               >
                 <svg
                   class="w-5 h-5"
@@ -259,7 +259,7 @@
                 >
                   <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                 </svg>
-                <span class="ml-4">Listagem de Cards</span>
+                <span class="ml-4">Cards do UniMagic</span>
               </a>
             </li>			
 			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/ListarDecksUser")) 
@@ -366,7 +366,7 @@
             <div class="flex justify-center flex-1 lg:mr-32">
               <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
                 
-				<form action="/search" method="GET">
+				<form action="/searchCardUser" method="GET">
 					<input
 					  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
 					  type="text"

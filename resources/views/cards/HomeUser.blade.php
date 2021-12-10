@@ -1,4 +1,4 @@
-@extends("templates.templateAdmin")
+@extends("templates.templateUser")
 @section("titulo", "Cards Cadastrados")
 <?php
 		$conexao = new mysqli("localhost", "root", "", "projetomagic");
@@ -12,7 +12,7 @@
 		<div class="dropdown " >
 		  <button class="dropbtn px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Visualizar</button>
 		  <div class="dropdown-content">
-			  <a href="/consumirApi?tipo=lista" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+			  <a href="/HomeUser?tipo=lista" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 				<svg
 					  class="w-5 h-5"
 					  aria-hidden="true"
@@ -27,7 +27,7 @@
 					</svg>
 					<span class="ml-4">Lista</span>
 			  </a>
-			  <a href="/consumirApi?tipo=icone" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+			  <a href="/HomeUser?tipo=icone" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 				<svg
 					  class="w-5 h-5"
 					  aria-hidden="true"
@@ -67,7 +67,7 @@
                             <div class="flex justify-center flex-1 lg:mr-32">
                                 <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
 
-                                <form action="/searchApi" method="GET">
+                                <form action="/searchCardUser" method="GET">
                                     @csrf
                                     <input
                                         class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
@@ -93,7 +93,6 @@
                             <th class="px-4 py-3">Raridade</th>
                             <th class="px-4 py-3">Cores</th>
                             <th class="px-4 py-3">Tipo</th>
-                            <th class="px-4 py-3">Obter</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -139,40 +138,7 @@
                                 </td>
                                 <td class="px-4 py-3 text-sm ">
                                 {{ $card->type }}
-                                </td>
-                                <td class="px-4 py-3">
-								@foreach($cardsUnimagi as $cardUni)									
-									@if($cardUni->id_api == $card->id)									 
-										@php $d = 1; @endphp									
-										@break
-									@else 
-										@php $d = 0; @endphp																	
-									@endif
-								@endforeach								
-								@if($d == 1)
-									
-										<span
-										  class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-											>
-											 Cadastrado
-										</span>			
-								@else
-									<div class="flex items-center space-x-4 text-sm">
-											<a data-fancybox data-type="iframe" class=" flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-											aria-label="Edit"  href="/cadastrarCard/{{ $card->id }}/edit"
-											>
-											<svg
-												class="w-5 h-5"
-												aria-hidden="true"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-											>
-												<path d="M10.219,1.688c-4.471,0-8.094,3.623-8.094,8.094s3.623,8.094,8.094,8.094s8.094-3.623,8.094-8.094S14.689,1.688,10.219,1.688 M10.219,17.022c-3.994,0-7.242-3.247-7.242-7.241c0-3.994,3.248-7.242,7.242-7.242c3.994,0,7.241,3.248,7.241,7.242C17.46,13.775,14.213,17.022,10.219,17.022 M15.099,7.03c-0.167-0.167-0.438-0.167-0.604,0.002L9.062,12.48l-2.269-2.277c-0.166-0.167-0.437-0.167-0.603,0c-0.166,0.166-0.168,0.437-0.002,0.603l2.573,2.578c0.079,0.08,0.188,0.125,0.3,0.125s0.222-0.045,0.303-0.125l5.736-5.751C15.268,7.466,15.265,7.196,15.099,7.03"></path>
-											</svg>
-											</a>
-										</div>
-								@endif
-                                </td>
+                                </td>                               
                             </tr>
                         @endforeach
 						
@@ -186,7 +152,7 @@
 				<div class="flex justify-center flex-1 lg:mr-32">
 					<div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
 
-						<form action="/searchApi" method="GET">
+						<form action="/searchCardUser" method="GET">
 							@csrf
 							<input
 								class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
@@ -233,34 +199,8 @@
 												{{ $card->releaseDate }} @endif
 											</p>
                                             <p class="font-semibold"> Raridade: {{ $card->rarity }}</p>
-											<span class="font-semibold" >Obter</span>
-											@foreach($cardsUnimagi as $cardUni)									
-												@if($cardUni->id_api == $card->id)									 
-													@php $d = 1; @endphp									
-													@break
-												@else 
-													@php $d = 0; @endphp																	
-												@endif
-											@endforeach								
-											@if($d == 1)												
-												<span
-												  class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-													>
-													 Cadastrado
-												</span>			
-											@else
-												<a data-fancybox data-type="iframe" class=" flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-											aria-label="Edit"  href="/cadastrarCard/{{ $card->id }}/edit"
-												>
-												<svg
-													
-												>
-													<path d="M10.219,1.688c-4.471,0-8.094,3.623-8.094,8.094s3.623,8.094,8.094,8.094s8.094-3.623,8.094-8.094S14.689,1.688,10.219,1.688 M10.219,17.022c-3.994,0-7.242-3.247-7.242-7.241c0-3.994,3.248-7.242,7.242-7.242c3.994,0,7.241,3.248,7.241,7.242C17.46,13.775,14.213,17.022,10.219,17.022 M15.099,7.03c-0.167-0.167-0.438-0.167-0.604,0.002L9.062,12.48l-2.269-2.277c-0.166-0.167-0.437-0.167-0.603,0c-0.166,0.166-0.168,0.437-0.002,0.603l2.573,2.578c0.079,0.08,0.188,0.125,0.3,0.125s0.222-0.045,0.303-0.125l5.736-5.751C15.268,7.466,15.265,7.196,15.099,7.03"></path>
-												</svg>
-												</a>
-										@endif																								
-                                        </div>
-										
+											
+                                        </div>										
                                     </div>
 
                                 </div>
@@ -269,6 +209,7 @@
                     @endforeach
             @endif
 		</div>
+
 	</div>
     <div
         class="flex justify-center px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
@@ -280,7 +221,7 @@
             <li>
                 @php $anterior = $pagina -1; @endphp
             <a
-                href="{{ "/consumirApi?pagina={$anterior}&tipo={$tipo}" }}"
+                href="{{ "/HomeUser?pagina={$anterior}&tipo={$tipo}" }}"
                 class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
                 aria-label="Previous"
             >
@@ -301,7 +242,7 @@
             @for ($i = $pagina; $i <= $pagina + $pageSize; $i++)
             <li>
                 <a
-                    href="{{ "/consumirApi?pagina={$i}&tipo={$tipo}" }}"
+                    href="{{ "/HomeUser?pagina={$i}&tipo={$tipo}" }}"
                     class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
                     @if ($pagina == $i) style="color: #9a75f4; font-weight: bold;" @endif
                 >
@@ -313,7 +254,7 @@
             <li>
                 @php $proxima = $pagina + 1; @endphp
                 <a
-                    href="{{ "/consumirApi?pagina={$proxima}&tipo={$tipo}" }}"
+                    href="{{ "/HomeUser?pagina={$proxima}&tipo={$tipo}" }}"
                     class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
                     aria-label="Next"
                 >

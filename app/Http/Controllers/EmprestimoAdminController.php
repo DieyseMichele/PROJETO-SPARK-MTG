@@ -85,11 +85,9 @@ class EmprestimoAdminController extends Controller
 		}
 		$emprestimo->dataEmprestimo = $request->get("dataEmprestimo");
 		$emprestimo->dataDevolucao = $request->get("dataDevolucao");
-		if($emprestimo->dataDevolucao < today()){
-			$emprestimo->status = 'A';
-		}else{
-			$emprestimo->status = $request->get("status");
-		}
+		
+		$emprestimo->status = $request->get("status");
+		
 		$emprestimo->save();
 		
 		$request->Session()->flash("status", "sucesso");

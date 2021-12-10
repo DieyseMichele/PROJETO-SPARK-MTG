@@ -9,4 +9,11 @@ class CadastrarDeck extends Model
 {
     use HasFactory;
 	protected $table = "cadastrar_deck";
+	
+	protected $fillable = [
+        'name',
+        'formato',
+        'user_id',
+    ];
+	
 }

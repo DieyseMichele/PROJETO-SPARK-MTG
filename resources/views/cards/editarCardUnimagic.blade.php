@@ -14,7 +14,7 @@
 					<span class="text-gray-700 dark:text-gray-400">ID:</span>
 					<input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
 					  type="text" name="id_api" placeholder="Digite o ID do card '86bf43b1-8d4e-4759-bb2d-0b2e03ba7012'"
-					  value="{{ $card->id }}" />
+					  value="{{ $card->id_api }}" />
 				</label>
 				</br>
 
@@ -33,9 +33,7 @@
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Cores:</span>
 					<input class="block w-g mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-						type="text" name="colors" value="@foreach ( $card->colors as $c => $value)
-                                    {{ $value}}
-                                @endforeach"/>
+						type="text" name="colors" value="{{$card->colors}}"/>
 				</label>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Raridade:</span>
@@ -56,7 +54,7 @@
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Quantidade:</span>
 					<input class="block w-g mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-						type="number" name="quantidade" placeholder="Digite a quantidade de cartas" value=""/>
+						type="number" name="quantidade" placeholder="Digite a quantidade de cartas" value="{{$card->quantidade}}"/>
 				</label>
 				</br>
 				<label class="block text-sm">
@@ -71,8 +69,8 @@
                   Cancelar
                 </button>
 				@csrf
-				<input type="hidden" name="id_api" value="{{ $card->id }}" />
-				<button type="submit" value="Close" onClick="window.parent.jQuery.fancybox.close();" class="px-4 py-2 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" >
+				<input type="hidden" name="id" value="{{ $card->id }}" />
+				<button type="submit" class="px-4 py-2 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" >
                   Salvar    
                 </button>		
 			</form>

@@ -33,9 +33,11 @@ use App\Http\Controllers\ConsumirAPIController;
 Route::resources([
 	"usuario" => UsuarioController::class,
 	"cadastrarCard" => CardCadastroController::class,
+	"cardsUnimagic" => CardController::class,
 	"cadastrarDeck" => DeckCadastroController::class,
 	"emprestimoAdmin"=>EmprestimoAdminController::class,	
-	"cardDeckShow"=>CardDeckController::class,	
+	"card_deck"=>CardDeckController::class,	
+	"cardsdeck"=>FuncoesUserController::class,	
 ]);
 
 Route::get('/', function () {
@@ -45,9 +47,6 @@ Route::get('/login', function () {
     return view('templates.templateLogin');
 })->name("login");//exibir página de login
 
-Route::get('/homeUser', function () {
-    return view('templates.templateUser');
-});//exibir home
 
 Route::get('/perfil', function () {
     return view('administrador.PerfilAdmin');
@@ -55,22 +54,28 @@ Route::get('/perfil', function () {
 Route::get('/perfilUser', function () {
     return view('usuario.Perfil');
 });//exibir página do perfil
+Route::get('/UserCadastrar', function () {
+    return view('decks.UserCadastrar');
+});
+
+
 
 //card
 Route::get("/search", [ SearchController::class, "search" ]);//busca cards digitados no input
-Route::get("/searchCard", [ CardDeckController::class, "searchCard" ]);//busca cards para tabela Add Card
-Route::get("/cardsCadastrados", [ CardCadastroController::class, "show" ]);//exibir cards cadastrados
+Route::get("/searchApi", [ ConsumirAPIController::class, "search" ]);//busca cards digitados no input
+Route::get("/searchCard", [ CardController::class, "searchCard" ]);//busca cards para tabela Add Card
+Route::get("/searchCardUser", [ FuncoesUserController::class, "searchCard" ]);//busca cards para tabela Add Card
+Route::get("/cardsCadastrados", [ CardController::class, "show" ]);//exibir cards cadastrados
 Route::get("/ListarCards", [ FuncoesUserController::class, "ListarCards" ]);//exibir cards cadastrados para usuário comum
 
 //decks
 Route::get("/decksCadastrados", [ DeckCadastroController::class, "show" ]);//exibir decks cadastrados
 Route::get("/ListarDecksUser", [ FuncoesUserController::class, "ListarDecksUser" ]);//exibir decks cadastrados du usuário
 Route::get("/ListarTodosDecks", [ FuncoesUserController::class, "ListarTodosDecks" ]);//exibir todos os decks cadastrados
-Route::post("/addCard", [ CardDeckController::class, "adicionar" ]);//adicionar card ao deck
-Route::post("/removerCardDeck", [ CardDeckController::class, "remover" ]);//adicionar card ao deck
 Route::post("/UserCadastrarDeck", [ FuncoesUserController::class, "UserCadastrarDeck" ]);//Usuário cadastra deck
 Route::get("/searchDeck", [ DeckCadastroController::class, "searchDeck" ]);//busca decks para tabela decks cadastrados
-Route::get("/indexAddCard", [ CardDeckController::class, "index" ]);
+Route::post("/ExportardecksCadastrados", [ DeckCadastroController::class, "exportar" ]);
+
 
 //usuários
 Route::get("/usuariosCadastrados", [ UsuarioController::class, "show" ]);//exibir usuarios cadastrados
@@ -82,9 +87,9 @@ Route::get("/searchUsuario", [ UsuarioController::class, "searchUsuario" ]);//bu
 Route::get("/relatorioEmprestimo", [ EmprestimoAdminController::class, "show" ]);//exibir relatório de empréstimos
 Route::get("/searchEmprestimo", [ EmprestimoAdminController::class, "searchEmprestimo" ]);//busca empréstimos no relatorio de emprestimos realizados
 
-Route::get("/home", [ ConsumirAPIController::class, "index" ]);
-Route::get("/consumirApi", [ ConsumirAPIController::class, "index" ]);
-Route::post("/bulkdata", [ CardController::class, "bulkdata" ]);
+Route::get("/home", [ ConsumirAPIController::class, "index" ]);//home admin
+Route::get("/HomeUser", [ FuncoesUserController::class, "HomeUser" ]);//home para usuário comum
+Route::get("/consumirApi", [ ConsumirAPIController::class, "index" ]);//conexão api
 
 Route::get('/ordenacaoDeck', [ OrdenacaoController::class, "ordenacaoDeck" ]);
 Route::post('/ordenacaoDeck', [ OrdenacaoController::class, "ordenacaoDeck" ]);

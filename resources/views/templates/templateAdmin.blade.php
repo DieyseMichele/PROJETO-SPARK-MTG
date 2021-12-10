@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!-- Título da página -->
-		<title>UniMagic - @yield("titulo")</title>
+		<title>Spark - MTG Deckbuilder - @yield("titulo")</title>
 		
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="{{ asset('css/fancybox.css') }}" />
@@ -34,7 +34,7 @@
       <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
         <div class="py-4 text-gray-500 dark:text-gray-400" >
           <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            UniMagic
+            Spark - MTG Deckbuilder
           </a>
 		  <!-- Lista do painel de controle -->
           <ul class="mt-6">
@@ -82,34 +82,11 @@
                 >
                   <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                 </svg>
-                <span class="ml-4">Listagem de Cards</span>
+                <span class="ml-4">Cards UniMagic</span>
               </a>
             </li>
 			
-			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/cadastrarCard")) 
-				class="active relative px-6 py-3" @endif
-			>
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/cadastrarCard"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                  ></path>
-                </svg>
-                <span class="ml-4">Cadastrar Cards</span>
-              </a>
-            </li>
+			
 			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/decksCadastrados")) 
 				class="active relative px-6 py-3" @endif
 			>
@@ -364,33 +341,10 @@
                 >
                   <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                 </svg>
-                <span class="ml-4">Listagem de Cards</span>
+                <span class="ml-4">Cards UniMagic</span>
               </a>
             </li>			
-			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/cadastrarCard")) 
-				class="active relative px-6 py-3" @endif
-			>
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/cadastrarCard"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                  ></path>
-                </svg>
-                <span class="ml-4">Cadastrar Cards</span>
-              </a>
-            </li>
+			
 			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/decksCadastrados")) 
 				class="active relative px-6 py-3" @endif
 			>

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Card;
+use mtgsdk\Card;
 use App\Models\CadastrarDeck;
 use App\Models\User;
-use App\Models\Card_Deck;
+use App\Models\CardDeck;
+use App\Models\CadastroCards;
 use DB;
 
 class CardDeckController extends Controller
@@ -22,53 +23,28 @@ class CardDeckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $cardDeck = new Card_Deck();
-		$deck = new CadastrarDeck();
-		$card = new Card();			
-		$cardDecks = Card_Deck::All();
-		$decks = CadastrarDeck::All();
-		$cards = Card::All();
-        return view("decks.AdicionarCard", [
+    
+	public function index(Request $request)
+	{
+		
+		$cardDeck = new CardDeck();
+		$cardDeck->deck = $request->get("deck");
+		$cardDecks = CardDeck::Where("deck", $request->get("deck"))->get();
+		$card = new CadastroCards();
+		$cards = CadastroCards::All();
+		$cds = DB::table('card_deck')
+            ->join('cadastro_card', 'cadastro_card.id', '=', 'card_deck.card')
+            ->join('cadastrar_deck', 'cadastrar_deck.id', '=', 'card_deck.deck')
+            ->select('cadastro_card.*', 'cadastrar_deck.id AS deck_id')
+            ->get();
+		return view("decks.AdicionarCard", [
 			"cardDeck" => $cardDeck,
 			"cardDecks" => $cardDecks,
 			"card" => $card,
 			"cards" => $cards,
-			"deck" => $deck,
-			"decks" => $decks,
-			
+			"cds" => $cds,
 		]);
-    }
-
-    public function adicionar(Request $request )
-    {
-		$validado = $request->validate([
-			"deck" => "required",			
-		], [
-			"required" => 'O campo :attribute é obrigatório.',
-		]);
-		
-		if ($request->get("id") != "") {
-			$cardDeck = Card_Deck::Find($request->get("id"));
-		} else {
-			$cardDeck = new Card_Deck();
-		}
-		
-		$cardDeck->deck = $request->get("deck");
-		$cardDeck->card = $request->get("card");
-		
-	
-		$cardDeck->save();
-
-      
-		$request->Session()->flash("status", "sucesso");
-		$request->Session()->flash("mensagem", "Card adicionado com sucesso!");
-		
-		return redirect("/indexAddCard");
-		
-    }
-
+	}
     /**
      * Store a newly created resource in storage.
      *
@@ -77,7 +53,23 @@ class CardDeckController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->get("id") != "") {
+			$cardDeck = $cardDeck::Find($request->get("id"));
+		} else {
+			$cardDeck = new CardDeck();
+		}
+		
+		$cardDeck->deck = $request->get("deck");
+		$cardDeck->card = $request->get("card");
+		
+		$cardDeck->save();
+		
+		$request->session()->flash("status", "sucesso");
+		$request->Session()->flash("mensagem", "Card adicionado com sucesso!");
+		
+		return redirect()->action(
+			[CardDeckController::class, "index"], [ "deck" => $request->get("deck") ]
+		);
     }
 
     /**
@@ -99,18 +91,7 @@ class CardDeckController extends Controller
      */
     public function edit($id)
     {
-        $card = new Card_Deck();
-		
-		$cards = DB::table('card__deck')
-            ->join('card', 'card.id', '=', 'card__deck.card')
-            ->join('card__deck', 'card__deck.deck', '=', $id)
-            ->select('card.*')
-            ->get();
-		
-        return view("decks.CardsDeck", [
-			"card" => $card,
-			"cards" => $cards
-		]);
+       
     }
 
     /**
@@ -131,19 +112,18 @@ class CardDeckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
-    }
-	
-	public function remover($id, Request $request)//remover card do deck
-    {
-		Card_Deck::Destroy($id);
-			
+       $cardDeck = CardDeck::Find($id);
+		$deck = $cardDeck->deck;
+		$cardDeck->delete();
+		
 		$request->Session()->flash("status", "sucesso");
 		$request->Session()->flash("mensagem", "Card removido com sucesso!");
 		
-		return redirect("/indexAddCard");
-        
+		return redirect()->action(
+			[CardDeckController::class, "index"], [ "deck" => $deck ]
+		);
     }
+	
 }

@@ -12,11 +12,11 @@
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Nome:</span>
 					<input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-					  type="text" name="name" placeholder="Nome do deck"  value="{{ $deck->name }}"/>
+					  type="text" name="name" placeholder="Nome do deck"  value=""/>
 				</label></br>
 				<label class="block text-sm">
 					<span class="text-gray-700 dark:text-gray-400">Formato:</span>
-					<select name="formato" id= "formato" class="form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="{{ $deck->formato }}">
+					<select name="formato" id= "formato" class="form-select block w-g mt-1 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray" value="">
 						<option value>Escolha o formato</option>
 						<option value="Constructed">Constructed</option>
 						<option value="Commander">Commander</option>

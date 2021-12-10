@@ -39,16 +39,14 @@ class CardCadastroController extends Controller
     public function store(Request $request)
     {
         
-		if ($request->get("id_api") != "") {
-			$card = CadastroCards::Find($request->get("id_api"));
-		} else {
-			$card = new CadastroCards();
-		}
+		
+		$card = new CadastroCards();
 		
 		$card->id_api = $request->get("id_api");
 		$card->name = $request->get("name");
 		$card->imageUrl = $request->get("imageUrl");
 		$card->manaCost = $request->get("manaCost");
+		$card->rarity = $request->get("rarity");
 		$card->colors = $request->get("colors");
 		$card->quantidade = $request->get("quantidade");
 		$card->disponivel = $request->get("disponivel");
@@ -60,7 +58,7 @@ class CardCadastroController extends Controller
 		$request->Session()->flash("status", "sucesso");
 		$request->Session()->flash("mensagem", "Card salvo com sucesso!");
 		
-		return redirect("/cadastrarCard");
+		return redirect("\home");
     }
 
     /**
@@ -80,24 +78,16 @@ class CardCadastroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {     	
-		$cards = Card::Find($id);
-		$card = new CadastroCards();
 		
-		$card->id_api = $cards->id;
-		$card->name = $cards->name;
-		$card->imageUrl = $cards->imageUrl;
-		$card->manaCost = $cards->manaCost;
-		$card->rarity = $cards->rarity;
-		$card->colors = $cards->colors;
-	
-	
-		$card->save();
+			$card = Card::Find($id);
+			$cards = new CadastroCards();
+			return view("cards.editarCard", [
+				"card" => $card,
+				"cards" => $cards
+			]);
 		
-		
-		return redirect("/home"); 
-
 
     }
 

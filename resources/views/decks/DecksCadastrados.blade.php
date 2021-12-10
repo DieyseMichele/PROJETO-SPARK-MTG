@@ -38,7 +38,9 @@
 					<th class="px-4 py-3">Nome</th>
 					<th class="px-4 py-3">Formato</th>
 					<th class="px-4 py-3">Usuário</th>
-				  <th class="px-4 py-3">Quantidade de Cards</th>				  
+				 				  
+				  <th class="px-4 py-3">Exportar</th>
+				  <th class="px-4 py-3">Cards</th>
 				  <th class="px-4 py-3">Ações</th>
 				  
 				</tr>
@@ -56,13 +58,31 @@
 						{{ $deck->usuario }}
 					  </td>
 					  <td class="px-4 py-3 text-sm ">
+						<form action="/ExportardecksCadastrados" method="POST">
+								<input type="hidden" name="id" value="{{ $deck->id }}" />
+								@csrf
+									<div>
+										<button
+										  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+										>
+										  Exportar
+										</button>
+								  </div>
+						 </form>
+					  </td>	
+					  <td class="px-4 py-3 text-sm">
+								
+							<div>
+							<a data-fancybox data-type="iframe" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="/card_deck?deck={{ $deck->id }}">Add Cards</a>
+								
+						  </div>
 						
 					  </td>	
 			  
 					  <td class="px-4 py-3">
 						<div class="flex items-center space-x-4 text-sm">
 						  <a data-fancybox data-type="iframe" class=" flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-							aria-label="Edit"  href="" 
+							aria-label="Edit"  href="/cadastrarDeck/{{ $deck->id }}/edit" 
 						  >
 							<svg
 							  class="w-5 h-5"

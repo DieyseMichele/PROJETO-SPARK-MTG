@@ -17,7 +17,7 @@ class CreateCadastrarDecksTable extends Migration
             $table->id();
 			$table->string('name');
 			$table->string('formato');
-			$table->foreignId('user_id')->constrained('users');
+			$table->foreignId('user_id')->constrained('users');	
             $table->timestamps();
         });
     }

@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Order;
-use App\Models\Card;
+use App\Models\CadastroCards;
 use App\Models\CadastrarDeck;
 use App\Models\User;
 use App\Models\Emprestimo;
+use App\Models\CardDeck;
 
 class DeckCadastroController extends Controller
 {
@@ -60,7 +61,7 @@ class DeckCadastroController extends Controller
 		$request->Session()->flash("status", "sucesso");
 		$request->Session()->flash("mensagem", "Deck Cadastrado com sucesso!");
 			
-		return redirect("/indexAddCard");
+		return redirect("/decksCadastrados");
     }
 
     /**
@@ -83,7 +84,7 @@ class DeckCadastroController extends Controller
 			"decks" => $decks
 		]);
     } 
-	
+	 
 
     /**
      * Show the form for editing the specified resource.
@@ -93,7 +94,48 @@ class DeckCadastroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $deck = CadastrarDeck::Find($id);
+		$decks = CadastrarDeck::All();
+		return view("decks.EditarDeck", [
+			"decks" => $decks,
+			"deck" => $deck
+		]);
+    }
+	public function exportar(Request $request)
+    {
+        
+		$arquivo = "deck.txt";
+		$id = $request->id;
+		//abrir arquivo txt 
+		$arq = fopen($arquivo,"w");
+
+		//faz consulta no banco de dados
+		
+			
+			$result = DB::table('card_deck')
+			->select('cadastro_card.', 'cadastrar_deck.')
+			->join('cadastro_card', 'cadastro_card.id', '=', 'card_deck.card')
+			->join('cadastrar_deck', 'cadastrar_deck.id', '=', 'card_deck.deck')
+			->where('cadastrar_deck.id', $id)
+			->select('cadastro_card.*', 'cadastrar_deck.*')
+			->get();
+
+		$cabecalho = "Cards no deck\n";
+
+		fwrite($arq, $cabecalho);
+		
+		foreach($result as $escrever){
+			$conteudo = $escrever ->id_api."\n";
+			$nome = $escrever -> name."\n";
+			$quantidade = $escrever->quantidade."\n";
+
+			//escreve no arquivo txt
+
+			fwrite($arq,$conteudo);
+		}
+
+		//fecha o arquivo
+		header("Location:".$arq->uri);
     }
 
     /**
@@ -123,7 +165,14 @@ class DeckCadastroController extends Controller
 		
 			return redirect("/decksCadastrados");
 		}	
-		else{
+		else if (CardDeck::where('deck', '=', $id)->exists()){
+			
+			$request->Session()->flash("status", "erro");
+			$request->Session()->flash("mensagem", "Não é possivel excluir esse deck, exclua os cards primeiro!");
+		
+			return redirect("/decksCadastrados");
+		}else{
+			
 			
 			CadastrarDeck::Destroy($id);
 			

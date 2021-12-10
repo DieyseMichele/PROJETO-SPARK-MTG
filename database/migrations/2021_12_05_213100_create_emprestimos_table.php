@@ -21,7 +21,6 @@ class CreateEmprestimosTable extends Migration
 			$table->date('dataEmprestimo');
 			$table->date('dataDevolucao');
 			$table->string('status');
-			
             $table->timestamps();
         });
     }

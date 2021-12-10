@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Card_Deck extends Model
+class CardDeck extends Model
 {
     use HasFactory;
-	protected $table = "card__deck";
+	protected $table = "card_deck";
+	
+	
 }

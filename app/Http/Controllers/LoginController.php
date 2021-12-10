@@ -25,7 +25,7 @@ class LoginController extends Controller
 			if(Auth::user()->permissao == 0){
 				return redirect("/home");
 			}else{
-				return redirect("/homeUser");
+				return redirect("/HomeUser");
 			}
             
         } else {
