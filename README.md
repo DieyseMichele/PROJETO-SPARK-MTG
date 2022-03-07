@@ -6,7 +6,7 @@
   * Cadastro de _cards_, _decks_ e usuários.
   * Listagem de todas as cartas do jogo MTG, assim como identificar se o UniMagic possui ou não cada carta.
   * Exportar _decks_.
-  * Funções de editar, excluir e buscars os itens cadastrados.
+  * Funções de editar, excluir e buscar os itens cadastrados.
   * Realizar empréstimos aos usuários.
 
 > <h2> Tecnologias utilizadas:</h2>
