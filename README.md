@@ -1,6 +1,6 @@
  <h1> Spark - MTG Deckbuilder </h1>
  
- Este projeto foi desenvolvido para auxiliar na gestão e usabilidade do projeto de extensão do IFTM - Campus Patrocínio, UniMagic. O Spark MTG utiliza a API MTG de [magicthegathering.io](http://magicthegathering.io/).
+ Este projeto foi desenvolvido para auxiliar na gestão e usabilidade do projeto de extensão do IFTM - Campus Patrocínio, UniMagic. O Spark MTG utiliza a API MTG de [magicthegathering.io](http://magicthegathering.io/) para coletar dados dos cards do game Magic: The Gathering.
  
  > <h2> Funcionalidades do Spark - MTG Deckbuilder:</h2>
   * Cadastro de _cards_, _decks_ e usuários.
