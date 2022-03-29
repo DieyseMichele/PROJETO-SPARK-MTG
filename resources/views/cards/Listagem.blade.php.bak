@@ -97,7 +97,6 @@
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        @php $d = 0; @endphp
                         @foreach ($cards as $card)
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3">
@@ -127,36 +126,21 @@
                                 @endif
 								</td>
                                 <td class="px-4 py-3 text-sm ">
-                                @if (isset( $card->manaCost))
-                               
-                                    {{ $card->manaCost }}
-                           
-                                 @endif
-                               
+                                {{ $card->manaCost }}
                                 </td>
                                 <td class="px-4 py-3 text-sm ">
-                                @if (isset( $card->rarity))
-                               
-                                    {{ $card->rarity }}
-                      
-                                 @endif
-                                
+                                {{ $card->rarity }}
                                 </td>
                                 <td class="px-4 py-3 text-sm ">
-                                @if (isset( $card->colors))
-                               
-                                 @foreach ( $card->colors as $c => $value)
-										{{ $value}}
-								    @endforeach
-                      
-                                @endif
-                                
+
+                                @foreach ( $card->colors as $c => $value)
+                                    {{ $value}}
+                                @endforeach
                                 </td>
                                 <td class="px-4 py-3 text-sm ">
                                 {{ $card->type }}
                                 </td>
                                 <td class="px-4 py-3">
-                                
 								@foreach($cardsUnimagi as $cardUni)									
 									@if($cardUni->id_api == $card->id)									 
 										@php $d = 1; @endphp									
@@ -218,7 +202,6 @@
 						</form>
 					</div>
                  </div></br>
-                 @php $d = 0; @endphp
                     @foreach ($cardsGroup as $group)
                         <div class="flex">
                             @foreach ($group as $card)

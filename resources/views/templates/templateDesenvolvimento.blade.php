@@ -180,7 +180,7 @@
 			<li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/campeonato"
+                href="/home"
               >
                 <svg
                   class="w-5 h-5"
@@ -202,12 +202,12 @@
                 <span class="ml-4">Campeonatos</span>
               </a>
             </li>
-			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/usuario")) 
+			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/campeonato")) 
 				class="active relative px-6 py-3" @endif
 			>
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/usuario"
+                href="/campeonato"
               >
                 <svg
                   class="w-5 h-5"
@@ -416,7 +416,7 @@
 			<li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/campeonato"
+                href="/home"
               >
                 <svg
                   class="w-5 h-5"
@@ -438,12 +438,12 @@
                 <span class="ml-4">Campeonatos</span>
               </a>
             </li>
-			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/usuario")) 
+			<li class="relative px-6 py-3" @if (str_ends_with(URL::current(), "/campeonato")) 
 				class="active relative px-6 py-3" @endif
 			>
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/usuario"
+                href="/campeonato"
               >
                 <svg
                   class="w-5 h-5"
@@ -717,7 +717,7 @@
 				</div>
 			@endif
 			<div class="content">
-				@yield("content")
+				Em desenvolvimento
 			</div>	
 		</main>
       </div>
