@@ -33,9 +33,8 @@ class ConsumirAPIController extends Controller
             $totalPages = ceil($totalCount / $pageSize);
             $cards = $body->cards;
             $cardsGroup = array_chunk($cards, 4, true);
-			$cardsUnimagi = CadastroCards::All();
 			
-            echo view('cards.Listagem', compact('cards', 'cardsGroup', 'totalPages', 'pagina', 'pageSize', 'tipo','cardsUnimagi'));
+            echo view('cards.Listagem', compact('cards', 'cardsGroup', 'totalPages', 'pagina', 'pageSize', 'tipo'));
         });
         $promise->wait();
 	}

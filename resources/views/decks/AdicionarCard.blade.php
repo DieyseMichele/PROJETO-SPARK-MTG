@@ -42,7 +42,7 @@
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        @foreach ($cardDecks as $cardDeck)
+                       
 							@foreach($cds as $c)
 								@if($c->deck_id == $cardDeck->deck)
 								<tr class="text-gray-700 dark:text-gray-400">
@@ -114,7 +114,7 @@
 								</tr>
 								@endif
 							@endforeach
-                        @endforeach
+                        
 						
                         </tbody>
                     </table>

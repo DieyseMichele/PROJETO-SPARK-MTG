@@ -16,7 +16,7 @@ class DeckCadastroController extends Controller
     public function __construct() {
 		$this->middleware("auth");
 	}
-	
+
     public function index(Request $request)
     {
         $deck = new CadastrarDeck();
@@ -46,7 +46,7 @@ class DeckCadastroController extends Controller
      */
     public function store(Request $request)
     {
-		
+
 		if ($request->get("id") != "") {
 			$deck = CadastrarDeck::Find($request->get("id"));
 		} else {
@@ -57,10 +57,10 @@ class DeckCadastroController extends Controller
 		$deck->formato = $request->get("formato");
 
 		$deck->save();
-		
+
 		$request->Session()->flash("status", "sucesso");
 		$request->Session()->flash("mensagem", "Deck Cadastrado com sucesso!");
-			
+
 		return redirect("/decksCadastrados");
     }
 
@@ -73,18 +73,18 @@ class DeckCadastroController extends Controller
     public function show()
     {
         $deck = new CadastrarDeck();
-		
+
 		$decks = DB::table('cadastrar_deck')
             ->join('users', 'users.id', '=', 'cadastrar_deck.user_id')
             ->select('cadastrar_deck.*', 'users.name AS usuario')
             ->get();
-		
+
         return view("decks.DecksCadastrados", [
 			"deck" => $deck,
 			"decks" => $decks
 		]);
-    } 
-	 
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -103,39 +103,52 @@ class DeckCadastroController extends Controller
     }
 	public function exportar(Request $request)
     {
-        
+
 		$arquivo = "deck.txt";
 		$id = $request->id;
-		//abrir arquivo txt 
-		$arq = fopen($arquivo,"w");
+		//abrir arquivo txt
+		$arq = fopen($arquivo, "w");
 
 		//faz consulta no banco de dados
-		
-			
+
+
 			$result = DB::table('card_deck')
-			->select('cadastro_card.', 'cadastrar_deck.')
+			->select(
+                'cadastro_card.*',
+            )
 			->join('cadastro_card', 'cadastro_card.id', '=', 'card_deck.card')
 			->join('cadastrar_deck', 'cadastrar_deck.id', '=', 'card_deck.deck')
 			->where('cadastrar_deck.id', $id)
-			->select('cadastro_card.*', 'cadastrar_deck.*')
 			->get();
 
 		$cabecalho = "Cards no deck\n";
 
 		fwrite($arq, $cabecalho);
-		
+
 		foreach($result as $escrever){
-			$conteudo = $escrever ->id_api."\n";
-			$nome = $escrever -> name."\n";
-			$quantidade = $escrever->quantidade."\n";
+			$conteudo = $escrever->id_api.";";
+			$conteudo .= $escrever->name.";";
+			$conteudo .= $escrever->quantidade.";";
+            $conteudo .= "\n\n";
 
 			//escreve no arquivo txt
-
-			fwrite($arq,$conteudo);
+			fwrite($arq, $conteudo);
 		}
 
-		//fecha o arquivo
-		header("Location:".$arq->uri);
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename='.basename($arquivo));
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($arquivo));
+        ob_clean();
+        flush();
+        readfile($arquivo);
+        unlink($arquivo);
+
+        fclose($arq);
     }
 
     /**
@@ -158,32 +171,32 @@ class DeckCadastroController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-			
+
 		if (Emprestimo::where('deck_id', '=', $id)->exists()) {
 			$request->Session()->flash("status", "erro");
 			$request->Session()->flash("mensagem", "Não é possivel excluir esse deck, pois está emprestado!");
-		
-			return redirect("/decksCadastrados");
-		}	
-		else if (CardDeck::where('deck', '=', $id)->exists()){
-			
-			$request->Session()->flash("status", "erro");
-			$request->Session()->flash("mensagem", "Não é possivel excluir esse deck, exclua os cards primeiro!");
-		
-			return redirect("/decksCadastrados");
-		}else{
-			
-			
-			CadastrarDeck::Destroy($id);
-			
-			$request->Session()->flash("status", "sucesso");
-			$request->Session()->flash("mensagem", "Deck excluído com sucesso!");
-		
+
 			return redirect("/decksCadastrados");
 		}
-		
+		else if (CardDeck::where('deck', '=', $id)->exists()){
+
+			$request->Session()->flash("status", "erro");
+			$request->Session()->flash("mensagem", "Não é possivel excluir esse deck, exclua os cards primeiro!");
+
+			return redirect("/decksCadastrados");
+		}else{
+
+
+			CadastrarDeck::Destroy($id);
+
+			$request->Session()->flash("status", "sucesso");
+			$request->Session()->flash("mensagem", "Deck excluído com sucesso!");
+
+			return redirect("/decksCadastrados");
+		}
+
     }
-	
+
 	public function searchDeck(Request $request){
 		// Get the search value from the request
 		$search = $request->input('search');

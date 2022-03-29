@@ -4,9 +4,10 @@
 	<div class="container px-6 mx-auto grid">
 		</br></br>
 		<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300 text-center">
-		  Meus Decks
+		  Decks Cadastrados
 		</h4></br></br>
 		<div class="w-full overflow-hidden rounded-lg shadow-xs">
+			
 		  <div class="w-full overflow-x-auto">
 			<table class="w-full whitespace-no-wrap ">
 			  <thead>
@@ -14,7 +15,7 @@
 					<div class="flex justify-center flex-1 lg:mr-32">
 					  <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
 						
-						<form action="" method="GET">
+						<form action="/searchDeck" method="GET">
 							@csrf
 							<input
 							  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
@@ -29,13 +30,15 @@
 							</span>
 						</form>
 					  </div>
+					  
 					</div>
 					</tr></br>
 				<tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 				
 					<th class="px-4 py-3">Nome</th>
-					<th class="px-4 py-3">Formato</th>
-				  <th class="px-4 py-3">Quantidade de Cards</th>				  
+					<th class="px-4 py-3">Formato</th>			  
+				  <th class="px-4 py-3">Exportar</th>
+				  <th class="px-4 py-3">Cards</th>
 				  <th class="px-4 py-3">Ações</th>
 				  
 				</tr>
@@ -44,19 +47,38 @@
 				@foreach ($decks as $deck)
 					<tr class="text-gray-700 dark:text-gray-400">
 					  <td class="px-4 py-3 text-sm ">
-						<a href="" class="font-semibold">{{ $deck->name }}</a>
+						<a href="/cardDeckShow/{{ $deck->id }}/edit" class="font-semibold">{{ $deck->name }}</a>
 					  </td>
 					  <td class="px-4 py-3 text-sm ">
 						{{ $deck->formato }}
 					  </td>
+					  
 					  <td class="px-4 py-3 text-sm ">
+						<form action="/ExportardecksCadastrados" method="POST">
+								<input type="hidden" name="id" value="{{ $deck->id }}" />
+								@csrf
+									<div>
+										<button
+										  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+										>
+										  Exportar
+										</button>
+								  </div>
+						 </form>
+					  </td>	
+					  <td class="px-4 py-3 text-sm">
+								
+							<div>
+							<a data-fancybox data-type="iframe" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" href="/card_deck?deck={{ $deck->id }}">Add Cards</a>
+								
+						  </div>
 						
 					  </td>	
 			  
 					  <td class="px-4 py-3">
 						<div class="flex items-center space-x-4 text-sm">
 						  <a data-fancybox data-type="iframe" class=" flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-							aria-label="Edit"  href="" 
+							aria-label="Edit"  href="/cadastrarDeck/{{ $deck->id }}/edit" 
 						  >
 							<svg
 							  class="w-5 h-5"
@@ -69,7 +91,7 @@
 							  ></path>
 							</svg>
 						  </a>
-						  <form action="" method="POST" onclick="return confirm('Tem certeza que deseja excluir');">
+						  <form action="/cadastrarDeck/{{ $deck->id }}" method="POST" onclick="return confirm('Tem certeza que deseja excluir');">
 								<input type="hidden" name="_method" value="DELETE" />
 								@csrf
 								<button type="submit" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
@@ -98,5 +120,10 @@
 		  </div>
 		</div>
 	</div>		
-	
+	<script>
+		function mudaPagina(pagina) {
+			$("#page").val(pagina);
+			$("#frmSelecao").submit();
+		}
+	</script>
 @endsection

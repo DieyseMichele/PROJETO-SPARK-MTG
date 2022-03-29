@@ -38,6 +38,7 @@ Route::resources([
 	"emprestimoAdmin"=>EmprestimoAdminController::class,	
 	"card_deck"=>CardDeckController::class,	
 	"cardsdeck"=>FuncoesUserController::class,	
+	"UserCadastrarDeck"=>FuncoesUserController::class,	
 ]);
 
 Route::get('/', function () {
@@ -72,7 +73,6 @@ Route::get("/ListarCards", [ FuncoesUserController::class, "ListarCards" ]);//ex
 Route::get("/decksCadastrados", [ DeckCadastroController::class, "show" ]);//exibir decks cadastrados
 Route::get("/ListarDecksUser", [ FuncoesUserController::class, "ListarDecksUser" ]);//exibir decks cadastrados du usuário
 Route::get("/ListarTodosDecks", [ FuncoesUserController::class, "ListarTodosDecks" ]);//exibir todos os decks cadastrados
-Route::post("/UserCadastrarDeck", [ FuncoesUserController::class, "UserCadastrarDeck" ]);//Usuário cadastra deck
 Route::get("/searchDeck", [ DeckCadastroController::class, "searchDeck" ]);//busca decks para tabela decks cadastrados
 Route::post("/ExportardecksCadastrados", [ DeckCadastroController::class, "exportar" ]);
 
